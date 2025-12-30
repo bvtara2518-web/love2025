@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our 2025 Love Wrap 💞</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Quicksand:wght@300;400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #ffeef8 0%, #fff5f7 50%, #f3e5f5 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .section.hidden {
+            display: none;
+        }
+        
+        h1 {
+            font-family: 'Caveat', cursive;
+            font-size: 3em;
+            color: #ff6b9d;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(255, 107, 157, 0.2);
+        }
+        
+        h2 {
+            font-family: 'Caveat', cursive;
+            font-size: 2.5em;
+            color: #c06c84;
+            margin-bottom: 20px;
+        }
+        
+        p {
+            font-size: 1.2em;
+            color: #6c5b7b;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .heart {
+            font-size: 80px;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .heart:hover {
+            transform: scale(1.2);
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+        }
+        
+        .button {
+            background: linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(255, 107, 157, 0.3);
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(255, 107, 157, 0.4);
+        }
+        
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .float-heart {
+            position: absolute;
+            font-size: 20px;
+            opacity: 0;
+            animation: float-up 4s ease-in infinite;
+        }
+        
+        @keyframes float-up {
+            0% {
+                opacity: 0;
+                transform: translateY(0) rotate(0deg);
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) rotate(360deg);
+            }
+        }
+        
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            width: 100%;
+            margin-top: 30px;
+        }
+        
+        .photo-card {
+            background: white;
+            border-radius: 20px;
+            padding: 15px;
+            box-shadow: 0 8px 25px rgba(192, 108, 132, 0.15);
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.5s ease;
+        }
+        
+        .photo-card.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .photo-placeholder {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #ffeef8 0%, #f3e5f5 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        
+        .photo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+        
+        .photo-caption {
+            font-size: 0.95em;
+            color: #c06c84;
+            font-style: italic;
+        }
+        
+        .place-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin: 15px 0;
+            box-shadow: 0 8px 25px rgba(192, 108, 132, 0.15);
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.6s ease;
+            cursor: pointer;
+        }
+        
+        .place-card.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .place-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(192, 108, 132, 0.25);
+        }
+        
+        .place-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .place-name {
+            font-size: 1.3em;
+            color: #ff6b9d;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .place-memory {
+            font-size: 0.95em;
+            color: #6c5b7b;
+            font-style: italic;
+        }
+        
+        .timeline {
+            width: 100%;
+            margin-top: 30px;
+        }
+        
+        .moment-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 8px 25px rgba(192, 108, 132, 0.15);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .moment-card.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .moment-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(180deg, #ff6b9d 0%, #c06c84 100%);
+        }
+        
+        .moment-emoji {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .moment-text {
+            font-size: 1.1em;
+            color: #6c5b7b;
+            text-align: left;
+        }
+        
+        .gift-box {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%);
+            border-radius: 20px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.3);
+        }
+        
+        .gift-box:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .gift-box::before {
+            content: '🎁';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4em;
+        }
+        
+        .gift-box.opening {
+            animation: shake 0.5s ease;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-10deg); }
+            75% { transform: rotate(10deg); }
+        }
+        
+        .surprise-message {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 50px rgba(192, 108, 132, 0.25);
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            max-width: 500px;
+        }
+        
+        .surprise-message.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .surprise-text {
+            font-size: 1.3em;
+            color: #c06c84;
+            line-height: 1.8;
+            font-style: italic;
+        }
+        
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #ff6b9d;
+            position: absolute;
+            animation: confetti-fall 3s ease-out forwards;
+        }
+        
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .fireworks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .spark {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #ff6b9d;
+            border-radius: 50%;
+            animation: spark-burst 1s ease-out forwards;
+        }
+        
+        @keyframes spark-burst {
+            0% {
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--x), var(--y));
+                opacity: 0;
+            }
+        }
+        
+        .replay-section {
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-hearts" id="floatingHearts"></div>
+    
+    <div class="container">
+        <!-- Section 1: Welcome -->
+        <div class="section active" id="section1">
+            <div class="heart" onclick="nextSection(2)">💖</div>
+            <h1>Hey Bus Bus Kuttie 💖</h1>
+            <p>Ready to relive our 2025 together?</p>
+            <button class="button" onclick="nextSection(2)">Start✨</button>
+        </div>
+        
+        <!-- Section 2: Photos -->
+        <div class="section hidden" id="section2">
+            <h2>Our Smiles Together 📸</h2>
+            <p>Every moment captured, every memory cherished</p>
+            <div class="photo-grid" id="photoGrid">
+                <div class="photo-card">
+                    <div class="photo-placeholder"><img src="2.jpeg" alt="Our memories"></div>
+                    <div class="photo-caption">Our smiles say everything 🥹</div>
+                </div>
+                <div class="photo-card">
+                    <div class="photo-placeholder"><img src="1.jpeg" alt="Forever moment"></div>
+                    <div class="photo-caption">This moment = forever</div>
+                </div>
+                <div class="photo-card">
+                    <div class="photo-placeholder"><img src="4.jpeg" alt="Birthday celebration"></div>
+                    <div class="photo-caption">It's Your Birthday 🎂</div>
+                </div>
+                <div class="photo-card">
+                    <div class="photo-placeholder"><img src="3.jpeg" alt="Just us"></div>
+                    <div class="photo-caption">Just us being us</div>
+                </div>
+            </div>
+            <button class="button" onclick="nextSection(3)">Next: Our Adventures 🗺️</button>
+        </div>
+        
+        <!-- Section 3: Places -->
+        <div class="section hidden" id="section3">
+            <h2>Places We Explored in 2025</h2>
+            <p>Every destination, a new story together</p>
+            <div class="timeline">
+                <div class="place-card" onclick="this.classList.add('show')">
+                    <div class="place-icon">🏖️</div>
+                    <div class="place-name">Silver Beach</div>
+                    <div class="place-memory">Where we went out at Night 1st Time</div>
+                </div>
+                <div class="place-card" onclick="this.classList.add('show')">
+                    <div class="place-icon">🚂</div>
+                    <div class="place-name">Train Travel</div>
+                    <div class="place-memory">This is our second Train travel. and the spl thing is "this Late Night"</div>
+                </div>
+                <div class="place-card" onclick="this.classList.add('show')">
+                    <div class="place-icon">🏨</div>
+                    <div class="place-name">Room Kasamusa</div>
+                    <div class="place-memory">We doing this Countless times, but This one something spl</div>
+                </div>
+            </div>
+            <button class="button" onclick="nextSection(4)">Next: Our Special Moments 💕</button>
+        </div>
+        
+        <!-- Section 4: Special Moments -->
+        <div class="section hidden" id="section4">
+            <h2>Moments That Matter 💫</h2>
+            <p>The little things that mean everything</p>
+            <div class="timeline">
+                <div class="moment-card">
+                    <div class="moment-emoji">💎</div>
+                    <div class="moment-text">buying small thing for you. indha year la athu konjama athigam ayirichu nu nenaikra, but i loves it. yeana unaku vangura la.</div>
+                </div>
+                <div class="moment-card">
+                    <div class="moment-emoji">💼</div>
+                    <div class="moment-text">You Got a job. Unnoda field la nee ponathu Romba happy ah irundhuchu. ana ipo unta daily pesa mudiyatho nu kashtama um irundhuchu. anyway that's life.</div>
+                </div>
+                <div class="moment-card">
+                    <div class="moment-emoji">📱</div>
+                    <div class="moment-text">that Phone calls, Athu illana en life romba bore ah poi irukum, kedaikra konja time layum enaku call pannuva</div>
+                </div>               
+                <div class="moment-card">
+                    <div class="moment-emoji">🎉</div>
+                    <div class="moment-text">Surprise visit.Unakaga wait pannathum nallarundhuchu and Un face a pathu na romba sandhosa patta. </div>
+                </div>
+            </div>
+            <button class="button" onclick="nextSection(5)">Next: A Special Surprise 🎁</button>
+        </div>
+        
+        <!-- Section 5: Surprise -->
+        <div class="section hidden" id="section5">
+            <h2>One More Thing... 🎁</h2>
+            <p>Click for More Love</p>
+            <div class="gift-box" id="giftBox" onclick="openGift()"></div>
+            <div class="surprise-message" id="surpriseMessage">
+                <p class="surprise-text">
+                    No matter what comes next...<br>
+                    I choose you. Always ❤️<br><br>
+                    Every day with you is a gift.<br>
+                    Here's to forever, my love.<br>
+                    
+                    Indha year la tha unna romba miss pannirka..<br>
+                    next Year la athu koraiyanum nu asa padra<br>
+                    and love you so much Bus Bus❤️
+                </p>
+                <button class="button" onclick="nextSection(6)">See Our Future ✨</button>
+            </div>
+        </div>
+        
+        <!-- Section 5: Surprise
+        <div class="section hidden" id="section5">
+            <h2>One More Thing... 🎁</h2>
+            <p>Click the gift to unlock your surprise</p>
+            <div class="gift-box" id="giftBox" onclick="openGift()"></div>
+            <div class="surprise-message" id="surpriseMessage">
+                <p class="surprise-text">
+                    No matter what comes next...<br>
+                    I choose you. Always ❤️<br><br>
+                    Every day with you is a gift.<br>
+                    Here's to forever, my love.
+                </p>
+                <button class="button" onclick="nextSection(6)">See Our Future ✨</button>
+            </div>
+        </div> -->
+        
+        <!-- Section 6: Ending -->
+        <div class="section hidden" id="section6">
+            <div class="fireworks" id="fireworks"></div>
+            <h1>This Was Our 2025</h1>
+            <p>And I can't wait for every year after — with you.</p>
+            <div style="font-size: 3em; margin: 30px 0;">💕</div>
+            
+            <div class="surprise-message show" style="margin-top: 40px;">
+                <h2 style="color: #ff6b9d; margin-bottom: 20px;">My Wishes for You in 2026 ✨</h2>
+                <p class="surprise-text" style="font-size: 1.1em;">
+                    May 2026 bring you endless joy and laughter 💫<br><br>
+                    May every dream you chase become reality 🌟<br><br>
+                    May we create even more beautiful memories together 💕<br><br>
+                    May your days be filled with love, peace, and all the happiness you deserve 🌈<br><br>
+                    And may we grow stronger, closer, and more in love with every passing day 💖<br><br>
+                    <strong style="color: #c06c84;">Here's to our forever, starting with 2026 ❤️</strong>
+                </p>
+            </div>
+            
+            <div class="replay-section">
+                <button class="button" onclick="replay()">Replay Our Love 💕</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Floating hearts background
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'float-heart';
+            heart.textContent = ['💕', '💖', '💗', '💝'][Math.floor(Math.random() * 4)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDelay = Math.random() * 4 + 's';
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            document.getElementById('floatingHearts').appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 7000);
+        }
+        
+        setInterval(createFloatingHeart, 800);
+        
+        // Section navigation
+        function nextSection(num) {
+            const current = document.querySelector('.section.active');
+            const next = document.getElementById('section' + num);
+            
+            current.classList.remove('active');
+            setTimeout(() => {
+                current.classList.add('hidden');
+                next.classList.remove('hidden');
+                setTimeout(() => {
+                    next.classList.add('active');
+                    initSection(num);
+                }, 50);
+            }, 500);
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Initialize section animations
+        function initSection(num) {
+            if (num === 2) {
+                const cards = document.querySelectorAll('.photo-card');
+                cards.forEach((card, i) => {
+                    setTimeout(() => card.classList.add('show'), i * 300);
+                });
+            }
+            
+            if (num === 3) {
+                const places = document.querySelectorAll('.place-card');
+                places.forEach((card, i) => {
+                    setTimeout(() => card.classList.add('show'), i * 400);
+                });
+            }
+            
+            if (num === 4) {
+                const moments = document.querySelectorAll('.moment-card');
+                moments.forEach((card, i) => {
+                    setTimeout(() => card.classList.add('show'), i * 300);
+                });
+            }
+            
+            if (num === 6) {
+                createFireworks();
+            }
+        }
+        
+        // Gift opening
+        function openGift() {
+            const box = document.getElementById('giftBox');
+            const message = document.getElementById('surpriseMessage');
+            
+            box.classList.add('opening');
+            
+            setTimeout(() => {
+                box.style.display = 'none';
+                createConfetti();
+                setTimeout(() => {
+                    message.classList.add('show');
+                }, 300);
+            }, 500);
+        }
+        
+        // Confetti effect
+        function createConfetti() {
+            const colors = ['#ff6b9d', '#c06c84', '#f67280', '#ffd6e8'];
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 0.3 + 's';
+                document.getElementById('section5').appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 3000);
+            }
+        }
+        
+        // Fireworks effect
+        function createFireworks() {
+            const container = document.getElementById('fireworks');
+            
+            function burst() {
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * window.innerHeight * 0.7;
+                const colors = ['#ff6b9d', '#c06c84', '#f67280', '#ffd6e8'];
+                
+                for (let i = 0; i < 20; i++) {
+                    const spark = document.createElement('div');
+                    spark.className = 'spark';
+                    spark.style.left = x + 'px';
+                    spark.style.top = y + 'px';
+                    spark.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    
+                    const angle = (Math.PI * 2 * i) / 20;
+                    const distance = 50 + Math.random() * 50;
+                    spark.style.setProperty('--x', Math.cos(angle) * distance + 'px');
+                    spark.style.setProperty('--y', Math.sin(angle) * distance + 'px');
+                    
+                    container.appendChild(spark);
+                    setTimeout(() => spark.remove(), 1000);
+                }
+            }
+            
+            burst();
+            setTimeout(burst, 500);
+            setTimeout(burst, 1000);
+            setTimeout(burst, 1500);
+        }
+        
+        // Replay function
+        function replay() {
+            location.reload();
+        }
+    </script>
+</body>
+</html>
